@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GoodFood | Animated Dashboard</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="dashboard-container">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo-area">
+            <div class="logo-icon"><i class="fas fa-utensils"></i></div>
+            <div class="logo-text">GOODFOOD</div>
+        </div>
+        <div class="menu-title">MENU</div>
+        <nav>
+            <ul>
+                <li class="active"><i class="fas fa-chart-pie"></i> Dashboard</li>
+                <li><i class="fas fa-hamburger"></i> Food Order</li>
+                <li><i class="fas fa-clipboard-list"></i> Manage Menu</li>
+                <li><i class="fas fa-star"></i> Customer Review</li>
+            </ul>
+            <div class="menu-title">OTHERS</div>
+            <ul>
+                <li><i class="fas fa-sliders-h"></i> Settings</li>
+                <li><i class="fas fa-credit-card"></i> Payment</li>
+                <li><i class="fas fa-user-circle"></i> Accounts</li>
+                <li><i class="fas fa-question-circle"></i> Help</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="top-bar">
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search menu, orders...">
+            </div>
+            <div class="profile-area">
+                <div class="avatar"><i class="fas fa-user-alt"></i></div>
+                <span>Delicious Burger</span>
+                <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+            </div>
+        </div>
+        <h2 class="dashboard-title">Dashboard</h2>
+
+        <!-- Top row: Revenue + Order Time -->
+        <div class="grid-2">
+            <!-- Revenue Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>Revenue</h4>
+                    <button class="view-btn" id="revenueReportBtn"><i class="fas fa-chart-line"></i> View Report</button>
+                </div>
+                <div class="big-stat" id="revenueValue">IDR 7.852.000</div>
+                <div><span class="trend-up"><i class="fas fa-arrow-up"></i> 2.1% vs last week</span></div>
+                <div class="period" style="font-size: 13px; color:#5b6f8c; margin-top: 6px;">Sales from 1-12 Dec, 2020</div>
+                <div class="bar-chart" id="animatedBarChart">
+                    <div class="bar-group"><div class="bar-pair"><div class="bar blue" data-h="58"></div><div class="bar gray" data-h="42"></div></div><span>Mon</span></div>
+                    <div class="bar-group"><div class="bar-pair"><div class="bar blue" data-h="72"></div><div class="bar gray" data-h="54"></div></div><span>Tue</span></div>
+                    <div class="bar-group"><div class="bar-pair"><div class="bar blue" data-h="46"></div><div class="bar gray" data-h="38"></div></div><span>Wed</span></div>
+                    <div class="bar-group"><div class="bar-pair"><div class="bar blue" data-h="84"></div><div class="bar gray" data-h="62"></div></div><span>Thu</span></div>
+                    <div class="bar-group"><div class="bar-pair"><div class="bar blue" data-h="65"></div><div class="bar gray" data-h="48"></div></div><span>Fri</span></div>
+                    <div class="bar-group"><div class="bar-pair"><div class="bar blue" data-h="70"></div><div class="bar gray" data-h="51"></div></div><span>Sat</span></div>
+                    <div class="bar-group"><div class="bar-pair"><div class="bar blue" data-h="79"></div><div class="bar gray" data-h="59"></div></div><span>Sun</span></div>
+                </div>
+                <div class="radio-group">
+                    <label><input type="radio" name="timeRange" checked> Last 6 Days</label>
+                    <label><input type="radio" name="timeRange"> Last Week</label>
+                </div>
+            </div>
+
+            <!-- Order Time Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>Order Time</h4>
+                    <button class="view-btn" id="orderTimeReportBtn"><i class="fas fa-chart-pie"></i> View Report</button>
+                </div>
+                <div class="period">From 1-6 Dec, 2020</div>
+                <div class="donut-wrapper">
+                    <canvas id="orderTimeCanvas" width="200" height="200"></canvas>
+                    <div class="time-legend" style="display: flex; gap: 20px; justify-content: center; margin-top: 12px;">
+                        <div><span style="background:#4a90e2; display:inline-block; width:12px; height:12px; border-radius:20px;"></span> Afternoon 40%</div>
+                        <div><span style="background:#9ba9c9;"></span> Evening 32%</div>
+                        <div><span style="background:#dfe5f0;"></span> Morning 28%</div>
+                    </div>
+                    <div style="font-size:13px; background:#f8fafd; border-radius: 20px; padding: 12px; margin-top: 16px; text-align:center;">
+                        <i class="fas fa-clock"></i> Peak Afternoon: 1,890 orders
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom row: Rating, Most Ordered, Order -->
+        <div class="grid-3">
+            <!-- Your Rating Card (Animated Circles) -->
+            <div class="card">
+                <div class="card-header"><h4>Your Rating</h4></div>
+                <p style="font-size:13px; color:#5b6f8c; margin-bottom: 8px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="rating-attached" id="ratingContainer">
+                    <div class="circle-progress" data-percent="85" data-color="#7b6cf6">
+                        <canvas width="130" height="130"></canvas>
+                        <div class="circle-inner"><span class="percent-num">0</span>%<span>Hygiene</span></div>
+                    </div>
+                    <div class="circle-progress" data-percent="92" data-color="#4cc9f0">
+                        <canvas width="130" height="130"></canvas>
+                        <div class="circle-inner"><span class="percent-num">0</span>%<span>Packaging</span></div>
+                    </div>
+                    <div class="circle-progress" data-percent="85" data-color="#ff9f43">
+                        <canvas width="130" height="130"></canvas>
+                        <div class="circle-inner"><span class="percent-num">0</span>%<span>Food Taste</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Most Ordered Food Card -->
+            <div class="card">
+                <div class="card-header"><h4>Most Ordered Food</h4></div>
+                <p style="font-size:13px; color:#5b6f8c; margin-bottom: 16px;">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="food-list">
+                    <div class="food-item"><div class="food-info"><div class="food-icon"><i class="fas fa-seedling"></i></div><span class="food-name">Fresh Salad Bowl</span></div><span class="food-price">IDR 45.000</span></div>
+                    <div class="food-item"><div class="food-info"><div class="food-icon"><i class="fas fa-drumstick-bite"></i></div><span class="food-name">Chicken Noodles</span></div><span class="food-price">IDR 75.000</span></div>
+                    <div class="food-item"><div class="food-info"><div class="food-icon"><i class="fas fa-blender"></i></div><span class="food-name">Smoothie Fruits</span></div><span class="food-price">IDR 45.000</span></div>
+                    <div class="food-item"><div class="food-info"><div class="food-icon"><i class="fas fa-dragon"></i></div><span class="food-name">Hot Chicken Wings</span></div><span class="food-price">IDR 45.000</span></div>
+                </div>
+            </div>
+
+            <!-- Order Card with Animated Line Chart -->
+            <div class="card">
+                <div class="card-header"><h4>Order</h4><button class="view-btn" id="orderReportBtn"><i class="fas fa-chart-line"></i> View Report</button></div>
+                <div class="big-stat" id="orderTotal">2.568</div>
+                <div><span class="trend-down"><i class="fas fa-arrow-down"></i> 2.1% vs last week</span></div>
+                <div class="period">Sales from 1-6 Dec, 2020</div>
+                <div class="line-chart-area">
+                    <svg class="line-svg" viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 130px; width: 100%;">
+                        <defs><linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#2b6e9e"/><stop offset="100%" stop-color="#5f9bc2"/></linearGradient></defs>
+                        <polyline class="line-path" points="30,66 110,45.6 190,50.4 270,30 350,21.6 430,38.4" fill="none" stroke="url(#lineGrad)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="800" stroke-dashoffset="800"/>
+                        <circle cx="30" cy="66" r="4.5" fill="#2b6e9e" stroke="white" stroke-width="2" opacity="0" class="dot-anim"/>
+                        <circle cx="110" cy="45.6" r="4.5" fill="#2b6e9e" stroke="white" stroke-width="2" opacity="0" class="dot-anim"/>
+                        <circle cx="190" cy="50.4" r="4.5" fill="#2b6e9e" stroke="white" stroke-width="2" opacity="0" class="dot-anim"/>
+                        <circle cx="270" cy="30" r="4.5" fill="#2b6e9e" stroke="white" stroke-width="2" opacity="0" class="dot-anim"/>
+                        <circle cx="350" cy="21.6" r="4.5" fill="#2b6e9e" stroke="white" stroke-width="2" opacity="0" class="dot-anim"/>
+                        <circle cx="430" cy="38.4" r="4.5" fill="#2b6e9e" stroke="white" stroke-width="2" opacity="0" class="dot-anim"/>
+                    </svg>
+                    <div class="axis-labels"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 10px; color:#96a6c2; padding:0 6px;"><span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
